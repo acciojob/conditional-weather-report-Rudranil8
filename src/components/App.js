@@ -33,32 +33,23 @@
 // }
 
 // export default App
-import './../styles/App.css';
+// import './../styles/App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import React ,{useState, useEffect} from 'react';
-
-const App = () => {
-  const [weatherInput, setWeatherInput] =useState({ temperature: 25, conditions: "Sunny" });
-  const [textColor, setTextColor] = useState("blue");
-  useEffect(() => {
-    // Set text color based on temperature threshold
-    if (weatherInput.temperature > 20) {
-      setTextColor("red");
-    } else {
-      setTextColor("blue");
-    }
-  }, [weatherInput.temperature]);
- 
+function Weather({ temperature, conditions }) {
+  const color = temperature > 20 ? 'red' : 'blue';
   return (
-    <div>
-        {/* Do not remove the main div */}
-       <div style ={{color:textColor}}>
-        <p>Temperature: {weatherInput.temperature}</p>
-        <p>Conditions: {weatherInput.conditions}</p>
-       </div>
+    <div style={{ color }}>
+      <p>Temperature: {temperature}</p>
+      <p>Conditions: {conditions}</p>
     </div>
-  )
+  );
 }
 
+const weatherInput = { temperature: 25, conditions: "Sunny" };
 
-export default App
+ReactDOM.render(
+  <Weather temperature={weatherInput.temperature} conditions={weatherInput.conditions} />,
+  document.getElementById('root')
+);
